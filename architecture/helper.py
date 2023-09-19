@@ -6,6 +6,10 @@ def clones(module, N):
     "Produce N identical layers."
     return nn.ModuleList([copy.deepcopy(module) for _ in range(N)])
 
+def show_example(fn, args=[]):
+    if __name__ == "__main__":
+        return fn(*args)
+
 class LayerNorm(nn.Module):
     "Construct a layernorm module (See citation for details)."
     
