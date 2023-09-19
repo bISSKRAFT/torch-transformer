@@ -7,7 +7,7 @@ def attention(query, key, value, mask=None, dropout=None):
     "Compute 'Scaled Dot Product Attention'"
 
     d_k = query.size(-1)
-    scores = torch.matmul(query, key.transpose(-2, 1)) / math.sqrt(d_k)
+    scores = torch.matmul(query, key.transpose(-2, -1)) / math.sqrt(d_k)
     if mask is not None:
         scores = scores.masked_fill(mask == 0, -1e9)
     p_attn = scores.softmax(dim=-1)
@@ -31,7 +31,7 @@ class MultiHeadedAttention(nn.Module):
     def forward(self, query, key, value, mask=None):
         if mask is not None:
             # Same mask applied to all h heads.
-            mask = mask.unsqueeeze(1)
+            mask = mask.unsqueeze(1)
         nbatches = query.size(0)
 
         # 1) Do all the linear projections in batch from d_model => h x d_k

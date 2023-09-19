@@ -10,7 +10,7 @@ from embedding import Embeddings
 from generator import Generator
 
 def make_model(
-        src_vocab, tgt_vocab, N=6, d_model=512, d_ff=2048, h=8, dropout=0.1
+    src_vocab, tgt_vocab, N=6, d_model=512, d_ff=2048, h=8, dropout=0.1
 ):
     "Helper: Construct a model from hyperparameters."
     c = copy.deepcopy
@@ -26,7 +26,7 @@ def make_model(
     )
 
     # This was important from their code.
-    # Initalize parameters with Glorot / fan_avg.
+    # Initialize parameters with Glorot / fan_avg.
     for p in model.parameters():
         if p.dim() > 1:
             nn.init.xavier_uniform_(p)

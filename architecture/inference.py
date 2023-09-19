@@ -13,7 +13,7 @@ def inference_test():
 
     for i in range(9):
         out = test_model.decode(
-            memory, src_mask, subsequent_mask(ys.size(1)).type_as(src.data)
+            memory, src_mask, ys, subsequent_mask(ys.size(1)).type_as(src.data)
         )
         prop = test_model.generator(out[:, -1])
         _, next_word = torch.max(prop, dim=1)
